@@ -1,7 +1,7 @@
 describe('Testing', function() {
 	
 	it('should behave...', function() {
-		expect(true).toBe(true);
+		expect(window.hello).toEqual('world');
 
 	});
 });
