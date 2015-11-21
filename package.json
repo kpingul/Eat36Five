@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "test": "karma start"
+    "test": "karma start --singlerun"
   },
   "repository": {
     "type": "git",
