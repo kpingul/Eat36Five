@@ -1,3 +1,5 @@
+'use strict';
+
 var request = require('supertest');
 var expect = require('expectacle');
 
@@ -16,6 +18,7 @@ describe('Tesintg Routes', function() {
 			.get('/')
 			.end(function(err, res) {
 				expect(res.status).toBe(200);
+				//expect to return index.ejs
 				done();
 			});
 	});
@@ -25,6 +28,7 @@ describe('Tesintg Routes', function() {
 			.get('/about')
 			.end(function(err, res) {
 				expect(res.status).toBe(200);
+				//expect to return about.ejs
 				done();
 			});
 	});
