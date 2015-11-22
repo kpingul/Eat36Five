@@ -3,15 +3,11 @@
 var request = require('supertest');
 var expect = require('expectacle');
 
-describe('Tesintg Routes', function() {
+describe('Testing Routes', function() {
 	var server;
 	beforeEach(function() {
 		server = require('../../server');
 	});
-	afterEach(function() {
-		server.close();
-	});
-
 
 	it('responds to /', function (done) {
 		request(server)
