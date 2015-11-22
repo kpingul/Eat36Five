@@ -11,7 +11,6 @@ app.set('view engine', 'ejs');
 app.set('views', __dirname + '/server/views');
 
 //Routes
-
 app.get('/', function(req , res) {
 
 	res.render('index');
@@ -21,6 +20,9 @@ app.get('/about', function(req, res) {
 	res.render('about');
 });
 
-app.listen(port, function() {
+//Startup Server
+var server = app.listen(port, function() {
 	console.log('listening on port ' + port);
 });
+
+module.exports = server;

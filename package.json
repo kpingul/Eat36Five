@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "test": "mocha -R spec spec.js && karma start karma.conf.js --single-run"
+    "test": "mocha server/tests -R spec && karma start karma.conf.js --single-run"
   },
   "repository": {
     "type": "git",
