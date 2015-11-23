@@ -12,3 +12,11 @@ Eat36Five Check List
 	Single Venue Page
 	-slick  (ken wheeler ) 
 	-swipebox 
+
+3). Testing Issues
+	
+	-find a way to test express routes with the foursquare services
+
+	-fnd a way to test the react components 
+
+	
