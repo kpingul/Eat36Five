@@ -1,5 +1,5 @@
 
-Eat36Five Check List
+Eat36Five Check List --
 
 1). Venue List / Venue Item refactoring and moving the ng directive binding to react syntax
 
