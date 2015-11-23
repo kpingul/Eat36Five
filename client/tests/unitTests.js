@@ -1,7 +1,21 @@
-describe('Testing', function() {
+describe('Application Tests', function() {
+	var mockJquery;
 	
-	it('should behave...', function() {
-		expect(true).toBe(true);
-
+	beforeEach(function() {
+		mockJquery = {
+			geocomplete: function(options) {
+				return options;
+			}
+		}
 	});
+	
+	it('should call geocomplete function', function() {
+		spyOn(mockJquery, 'geocomplete').and.callThrough();
+		mockJquery.geocomplete({});
+		expect(mockJquery.geocomplete({})).toEqual({});
+	});
+
+
+
+
 });

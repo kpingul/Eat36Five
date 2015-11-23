@@ -1,0 +1,14 @@
+
+Eat36Five Check List
+
+1). Venue List / Venue Item refactoring and moving the ng directive binding to react syntax
+
+2). Mulitple Venues
+	Check for React Library dependencies
+	-Leaflet
+	-google maps box
+	
+
+	Single Venue Page
+	-slick  (ken wheeler ) 
+	-swipebox 

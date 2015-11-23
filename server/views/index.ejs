@@ -26,7 +26,7 @@
 			            <p class="middle-title-2">Feeling Hungry?</p>
 			            <p class="middle-title-1"><strong>We're</strong> here to help!</p>
 			            
-			            <form  class="form-inline" >
+			            <form  class="form-inline" id="form" method="GET"  action="/venues">
 			              <label for="locationTerm" class="middle-title-3">Your Location</label>
 			              <div class="middle-form">
 			                <div class="input-group">
@@ -34,9 +34,15 @@
 			                    type="text" 
 			                    id="input" 
 			                    class="form-control" 
-			                    name="locationTerm" 
 			                    placeholder="e.g. 102 Mission St, San Francisco" 			             		       
 			                    required>
+			                    
+			                    <!-- lat and lng contain the values of the locations 
+									latitude and longitude using the jquery geocomplete
+									plugin
+			                	-->
+								<input name="lat" type="text" value="" class="hide">
+ 								<input name="lng" type="text" value="" class="hide">
 			                  <span class="input-group-btn">
 			                    <button class="btn btn-default middle-form-button" id="search" style="cursor: auto">
 			                      <i class="fa fa-map-pin"></i>
@@ -60,16 +66,16 @@
 			                    <span class="input-group-btn">
 			                      <button class="btn btn-default middle-form-button" id="search" type="submit">
 			                        Search
-			                        <i class="fa fa-spinner fa-spin" ></i>
+			                    <!--     <i class="fa fa-spinner fa-spin" ></i> -->
 			                      </button>
 			                    </div><!-- /input-group -->
 			                  </div><!-- ened of middle-form -->
 
 			                  <!-- ERROR handling -->
-			                    <div class="alert alert-info" role="alert" style=" margin-top: 13px; color: #123D52">
+			            <!--         <div class="alert alert-info" role="alert" style=" margin-top: 13px; color: #123D52">
 			                      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 			                      <strong>Cannot find any results with (search term here...) , please enter another search term.</strong>
-			                    </div>
+			                    </div> -->
 			              </form><!-- end of form -->
 			          </div>
 			        </div>
@@ -125,8 +131,11 @@
 		</div><!-- end of container -->
 
 		<!-- Libs -->
+		<script src="http://maps.googleapis.com/maps/api/js?libraries=places&sensor=false"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-alpha1/jquery.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+		<script src="libs/jquery.geocomplete.js"></script>
+
 		
 		<!-- Application Files -->
 		<script src="js/app.js"></script>

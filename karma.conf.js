@@ -15,6 +15,8 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
+        'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-alpha1/jquery.min.js',
+        'client/libs/jquery.geocomplete.js',
         'client/js/app.js',
         'client/tests/unitTests.js'
     ],
