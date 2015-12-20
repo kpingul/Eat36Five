@@ -1,0 +1,242 @@
+<html lang="en" ng-app="myApp">
+  <head>
+    <meta charset="UTF-8">
+    <base href="/">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0,user-scalable=no">
+    <!-- CSS Libraries -->
+ 		<link rel="stylesheet" href="css/bootstrap.css">
+ 		<link rel="stylesheet" href="bower_components/slick-carousel/slick/slick-theme.css">
+		<link rel="stylesheet" href="bower_components/slick-carousel/slick/slick.css">
+		<link rel="stylesheet" href="bower_components/swipebox/src/css/swipebox.css">
+		<link rel="stylesheet"  href="bower_components/leaflet/dist/leaflet.css">
+    <!-- CSS stylesheets -->
+    <link rel="stylesheet" href="css/stylesheet.css">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+
+    <title>Eat36Five</title>
+  </head>
+
+  <body ng-controller="VenueCtrl" ng-cloak>
+	
+    <!--_____________________-->
+    <!--    Main Container   -->
+    <!--_____________________-->
+    <div class="OuterMainContainer  ">
+								
+
+			<nav class="navbar navbar-default" style="margin-bottom: 0px">
+				<div class="container-fluid">
+					<div class="navbar-header">
+						
+						<a class="navbar-brand" ui-sref="home">Eat36Five</a>
+					</div><!-- end of navbar header -->
+				</div><!-- end of container-fluid -->
+			</nav><!-- end of navigation bar -->
+			<div class="container VenueContainer">
+				
+				<div class="row">
+					
+					<!-- Angular Slick Carousel Plugin -->
+					<slick
+					arrows="true"
+					speed="300"
+					slides-to-show="5"
+					touch-move="false"
+					slides-to-scroll="1"
+					data="venue.photos.groups[1].items"
+					init-onload="true"
+					responsive="slickBP">
+					<div ng-repeat="photo in ::venue.photos.groups[1].items">
+						
+						<div class="img-wrap" >
+							<img class="img-responsive" ng-src="{{::photo.prefix}}300x300{{::photo.suffix}}" alt="">
+							<div class="img-info">
+								<h4><strong>{{::photo.user.firstName}} {{::photo.user.lastName}} </strong></h4>
+								<p>on {{::photo.createdAt | timefilter}}</p>
+							</div>
+						</div>
+					</div>
+					
+					</slick><!-- end of slick carousel -->
+					<h4 class="text-center" >
+					<a href="" venue-photo-gallery>See all photos</a>
+					</h4>
+					</div><!-- end of row -->
+					<div class="row">
+						<div class="col-md-8">
+							
+							<div class="panel panel-default">
+								<div class="panel-body" style="padding: 0; padding: 0px 20px">
+									
+									<span class="addressName">
+										<h1>{{::venue.name}}</h1>
+										<p>{{::venue.categories[0].name}} &middot; {{::venue.categories[1].name}}</p>
+									</span>
+									<address class="businessInformationContainer">
+										
+										<strong><span class="businessRating">{{::venue.rating}}</span> Based on {{::venue.ratingSignals}} ratings </strong>
+									</p>
+									<strong>{{::venue.location.address}}<br>
+									{{::venue.location.city}}, {{::venue.location.state}} {{::venue.location.postalCode}}</strong><br>
+									<span class="glyphicon glyphicon-earphone"></span>{{::venue.contact.formattedPhone}}<br>
+									<span class="glyphicon glyphicon-new-window"></span>
+									<a href="{{::venue.url}}">{{::venue.name | lowercase}}</a>
+									</address><!-- end of address -->
+									
+									<address class="businessMenu">
+										<span><b>Hours</b>: <strong ng-class="{closedVenue : venue.hours.isOpen == false, openVenue : venue.hours.isOpen == true}">{{::venue.hours.status}}</strong>
+											
+											<a
+												href=""
+												data-container="body"
+												data-toggle="popover"
+												data-placement="top"
+												id="popoverBusinessHours"
+												data="venue.hours.timeframes"
+												business-hours-toolbar>
+												(View hours)
+											</a>
+										</span>
+										<span><b>Price: </b> <strong class="pricing">{{::venue.attributes.groups[0].summary}}</strong> {{::venue.price.message}}</span>
+										<span ng-repeat="menu in venue.attributes.groups | menufilter">
+											<span ng-if="menu.name === 'Menus'"><b>Menu</b> <strong class="glyphicon glyphicon-cutlery"></strong> : {{menu.summary}} <a href="{{venue.menu.url}}"><small>(View Menu)</small></a></span>
+											<span ng-if="menu.name === 'Drinks'"><b>Drinks</b>: {{menu.summary}}</span>
+										</span>
+										
+										<span><b>Visits</b>  &middot;  {{::venue.stats.visitsCount}}</span>
+										
+										<span>	<b>Checkins </b>&middot; {{::venue.stats.checkinsCount}}</span>
+										</address><!-- end of address -->
+									</div><!-- end of panel body -->
+								</div><!-- end of panel -->
+										
+										
+							</div><!-- end of column md-3-->
+								<div class="col-md-4 pull-right">
+									<div id="venue-canvas" style="width: 100%; height: 20em">
+									</div>
+								</div>
+								
+					</div><!-- end of row -->
+
+			<!-- 		<div class="row">
+						<div class="col-md-12">
+							
+									<h1><strong><i class="fa fa-foursquare"></i>Total Number of Checkins vs. Similar Venues</strong></h1>
+						</div>
+					</div> -->
+
+					<div class="row">					
+						<div class="col-md-9">											
+							<h2>Recommended Reviews</h2>
+							<div class="panel panel-default">
+								<div class="panel-body ">
+									<span class=" userReviewTotalLength userReviewBody"><b>{{::venue.tips.groups[0].items.length}} tips and reviews</b></span>
+									<span class="float-right userReviewBody ">
+										<span><b> Sort </b>|</span>
+										<span><a href="" ng-click="sortType = '-createdAt'">Recent |</a></span>
+										<span><a href="" ng-click="sortType = '-likes.count'">Popular</a></span>
+									</span>	
+								</div><!-- end of panel body -->
+							</div><!-- end of panel -->
+									
+							<ul class="userReviewList">
+								<li ng-repeat="user in venue.tips.groups[0].items | filter: phraseName| orderBy: sortType | limitTo: reviewLim">							
+									<div class="media">
+										<div class="media-left">
+											<img class="media-object userReviewThumbnails" ng-src="{{user.user.photo.prefix}}300x300{{user.user.photo.suffix}}" >
+										</div>
+										<div class="media-body">
+											<h5 class="media-heading">
+											{{user.text}}
+											</h5>
+											<small  class="text-muted">{{user.user.firstName}} {{user.user.lastName}}  <strong>&middot;</strong> {{user.createdAt | timefilter}}  <strong>&middot;</strong> <span class="glyphicon glyphicon-heart" style="font-size: 0.9em"></span> {{user.likes.count}} likes</small>
+										</div><!-- end of media body -->
+									</div><!-- end of media -->
+								</li><!-- end of ng repeat  user  values -->
+								<center>
+									<button 
+										class="btn btn-primary btn-md" 
+										ng-disabled='reviewLim === venue.tips.groups[0].items.length' 
+										ng-click="loadMoreReviews()">
+										Load More Reviews
+										<i class="fa fa-spinner fa-spin" ng-if="toggleReviews"></i>
+									</button>
+								<center>
+							</ul><!-- end of user review list -->
+							
+						</div><!-- end of column-->
+						
+						<div class="col-md-3">
+							<div class="panel panel-default">
+								<div class="panel-heading">
+									<strong class="businessHoursTitle">More Business Info</strong>
+								</div>
+								<div class="panel-body">
+									<ul class="businessInformationList">
+										<li ng-repeat="info in ::venue.attributes.groups">
+											{{::info.items[0].displayName}} - <strong>{{::info.items[0].displayValue}}</strong>
+										</li>
+									</ul><!-- end of business InformationList list -->
+								</div><!-- end of panel body -->
+							</div><!-- end of panel -->
+							
+							<h5><strong>You May Also Like</strong></h5>
+							<div
+								class="similarVenueContainer"
+								ng-repeat="(index, similarVenue) in similarVenues track by $index"
+								ng-click="viewSimilarVenue(similarVenues[index].id)">
+								
+								<address style="line-height: 1.1">
+									
+									<a class="similarVenueContainerLink" href="">
+										
+										<img class="pull-left similarVenueImg" ng-src="{{similarVenue.categories[0].icon.prefix}}bg_64{{similarVenue.categories[0].icon.suffix}}"/>
+										<h5>
+											<a href="">{{similarVenue.name}}</a>
+										</h5>
+										<p>{{similarVenue.categories[0].shortName}}</p>
+										<small>{{similarVenue.location.address}} ({{similarVenue.location.crossStreet}})</small>			
+									</a>
+								</address>
+							</div><!-- end of similar venue container -->
+						</div><!-- end of col md 3 -->
+					</div><!-- end of row-->
+			</div>	<!-- end of container -->
+
+			<div class="footer">
+				<p>
+					<span style="float: left">@Eat36Five</span>
+					<span style="float: right">Created by Kirck Pingul</span>
+				</p>
+			</div>  		
+
+
+  	
+	
+    </div><!-- end of container -->
+
+
+		<script>
+			var venueData = <%- JSON.stringify(venue) %>
+		</script>
+    <!-- Libs -->
+		<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places&sensor=false"></script>
+
+		<script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
+		<script src="bower_components/leaflet/dist/leaflet.js"></script>
+		<script src="bower_components/jquery/dist/jquery.min.js"></script>
+		<script src="bower_components/angular/angular.min.js"></script>
+		<script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+		<script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+		<script src="bower_components/slick-carousel/slick/slick.min.js"></script>
+		<script src="bower_components/angular-slick/dist/slick.js"></script>
+		<script src="bower_components/swipebox/src/js/jquery.swipebox.js"></script>
+		
+		<script src="js/angularApp.js"></script>
+		<script src="js/venueCtrl.js"></script>
+  </body>
+</html>
+
+
+							

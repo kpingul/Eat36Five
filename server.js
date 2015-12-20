@@ -39,11 +39,41 @@ app.get('/venues', function(req, res) {
 	foursquare.venues.explore({ll: latLng, query: type, radius: "10000", venuePhotos: "1", limit: "25"}, function(err, response) {
 		if(err) 
 			res.status(500);	
-		
-		var reactHtml = ReactDOMServer.renderToString(ReactComponent({ data: response.response.groups[0].items })); 
-		res.render('venues', { helloComponentMarkup: reactHtml, data: response.response.groups[0].items });
+		res.render('venues', { venues: response.response.groups[0].items });
 	});
 
+
+});
+
+app.get('/venue/:id', function(req, res) {
+
+	//should create an async call that calls
+	//for venue data,venue photos, AND similar venues using async library
+	//async.parallel call and return an object that contains 
+		//1). venue: venue information
+		//2). venuePhotos: venue photos
+		//3). 	similarVenues: similar venue information
+
+	foursquare.venues.venue(req.params.id, {}, function(err, response) {
+		if(err) 
+			res.status(500).send({error: "error with API"});
+		res.render('venue', {venue: response});
+	});
+
+	// foursquare.venues.photos(req.params.id, {}, function(err, response) {
+	// 	if(err) {
+	// 		res.status(500).send({error: "error with API"});
+	// 	}
+	// 	res.send(response);
+	// });
+	
+
+	// foursquare.venues.similar(req.params.id, {}, function(err, response) {
+	// 		if(err) {
+	// 			res.status(500).send({error: "error with API"});
+	// 		}
+	// 		res.send(response);
+	// 	});
 
 });
 

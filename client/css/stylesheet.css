@@ -63,6 +63,9 @@ h2{
     z-index: 1200000 !important;
 
 }
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+  display: none !important;
+}
 
 .pac-item:hover {
     background: #4eaacf !important;

@@ -1,15 +1,23 @@
 var React = require('react');
 var VenueItem = require('./VenueItem.jsx');
+/**
+* @jsx React.DOM
+*/
 
 var VenueList = React.createClass({
+	
+
+	componentWillMount: function() {
+		console.log(this.props.venues);
+  	this.setState({ data: this.props.venues.response} );
+	},
+
 	render: function() {
-		var venues = this.props.data.map(function( venue, index ) {
-			return <VenueItem reactKey={index + 1} key={index + 1} venue={venue}/>
-		});	
+		console.log('render');
+	
 
 		return (
 			<ul className="searchVenueList">
-				{venues}
 			</ul>
 		);
 	

@@ -1,109 +1,132 @@
-<html lang="en">
+<html lang="en" ng-app="myApp">
   <head>
     <meta charset="UTF-8">
     <base href="/">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0,user-scalable=no">
-
     <!-- CSS Libraries -->
- 	<link rel="stylesheet" href="css/bootstrap.css">
+ 		<link rel="stylesheet" href="css/bootstrap.css">
+		<link rel="stylesheet"  href="bower_components/leaflet/dist/leaflet.css">
     <!-- CSS stylesheets -->
     <link rel="stylesheet" href="css/stylesheet.css">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 
     <title>Eat36Five</title>
   </head>
 
-  <body>
+  <body ng-controller="VenuesCtrl" ng-cloak>
 	
     <!--_____________________-->
     <!--    Main Container   -->
     <!--_____________________-->
     <div class="OuterMainContainer  ">
-    	
+  		
 
-		<nav class="navbar navbar-default" style="margin-bottom: 0px">
-			<div class="container-fluid">
-				<div class="navbar-header">
-					
-					<a class="navbar-brand" href="/">Eat36Five</a>
-					</div><!-- end of navbar header -->
-					</div><!-- end of container-fluid -->
-					</nav><!-- end of navigation bar -->
-					<div id="spinner">
-						<span id="first" class="ball"></span>
-						<span id="second" class="ball"></span>
-						<span id="third" class="ball"></span>
-					</div>
-					<div class="containers">
-						<div class="row">
-							<div class="col-xs-12 col-sm-6 col-md-6 searchVenueContainer">
-								<div class="SearchVenueFilterContainer">
-									<h4>
-									<p><small>Showing <b><%= data.length %></b> results</small></p>
-									<button
-										class="btn btn-primary btn-md"
-										type="button"
-										data-toggle="collapse"
-										data-target="#collapseExample"
-										aria-controls="collapseExample"
-										aria-expanded="false"
-										>
-										Show Filters
-									</button>
-									</h4>
-									
-									<div class="collapse" id="collapseExample">
-										<div class="well clearfix">
-											
-											<div class="dropDownSearchList">
-												
-												<h5><strong>SortBy</strong></h5>
-												<ul class="innerDropDownSearchList">
-													
-													<li>
-														<a href=""  >Best Match</a>
-													</li>
-													<li >
-														<a href=""  >Highest Rated</a>
-													</li>
-													<li>
-														<a href="" >Lowest Rated</a>
-													</li>
-													</ul><!-- end of innerDropDownSearchList -->
-													
-													</div><!-- end of dropDownSearchList -->
-													<div class="dropDownSearchList">
-														
-														<h5><strong>Price</strong></h5>
-														<ul class="innerDropDownSearchList">
-															
-															<li>
-																<a href="" >Most Expensive</a>
-															</li>
-															<li>
-																<a href="" >Least Expensive</a>
-															</li>
-														</ul>
-												</div><!-- end of dropDownSearchList -->
-											</div><!-- end of well -->
-										</div><!-- end of collapse -->									
-								</div> <!-- SearchVenueFilterContainer -->
-							<div id="react-container">
-								 <%- helloComponentMarkup %> 
+				<nav class="navbar navbar-default" style="margin-bottom: 0px">
+					<div class="container-fluid">
+						<div class="navbar-header">
+							
+							<a class="navbar-brand" href="/">Eat36Five</a>
+							</div><!-- end of navbar header -->
+							</div><!-- end of container-fluid -->
+							</nav><!-- end of navigation bar -->
+							<div id="spinner">
+								<span id="first" class="ball"></span>
+								<span id="second" class="ball"></span>
+								<span id="third" class="ball"></span>
 							</div>
-							</div><!-- end of col-md-6 -->
-							<div class="col-xs-12 col-sm-6 col-md-6" style="padding: 0">
-				
-								<div id="mapCanvas" style="width: 100%; height: 92%"></div>					
-							</div><!-- end of col-md-6 -->											
-				</div><!-- end of row -->
-		</div><!-- end of container -->
+							<div class="containers">
+								<div class="row">
+									<div class="col-xs-12 col-sm-6 col-md-6 searchVenueContainer">
+									
+										<ul class="searchVenueList">
+											<li ng-repeat="venue in venues | orderBy: sortType |limitTo: venueLimit track by $index " ng-mouseover="actMap(venue.venue.location.lat)" activate-map data="{{venue.venue.location.lat}}">
 
+				 								<div class="media">
+													<div class="media-left SearchVenuePhotoContainer">
+														<a ng-href="/venue/{{venue.venue.id}}">
+															<img
+															class="media-object SearchVenuePhoto"
+															ng-src="{{venue.venue.photos.groups[0].items[0].prefix}}300x300{{venue.venue.photos.groups[0].items[0].suffix}}"
+															alt="...">
+														</a>
+														
+														</div><!-- end of media-left -->
+														<div class="media-body searchVenueBody">
+															<p>
+																<span class="searchVenueIndex">{{$index + 1}}</span>. <span class="searchVenueRating">{{venue.venue.rating}}</span>
+																<small>Click for more details...</small>
+															</p>
+															<h4 class="media-heading">
+															<a  ng-href="/venue/{{venue.venue.id}}">{{venue.venue.name}}</a>
+															</h4>
+															<strong>{{duplicate(venue.venue.price.currency, venue.venue.price.tier)}}</strong> &middot; {{venue.venue.categories[0].name}}<br>
+															{{venue.venue.hours.status}}
+														</div><!-- end of media body -->
+															
+														<div class="media-right searchVenueAddressContainer">
+																
+															<address class="searchVenueAddress">
+																{{venue.venue.location.address}}<br>
+																{{venue.venue.location.city}},{{venue.venue.location.state}}<br>
+																{{venue.venue.contact.formattedPhone}}
+															</address>
+														</div><!-- end of media right -->
+												</div><!-- end of media -->
+															
+												<div class="media" style="line-height: 1em">
+													
+													<img
+														class="SearchVenueUserPhoto"
+														ng-src="{{venue.tips[0].user.photo.prefix}}300x300{{venue.tips[0].user.photo.suffix}}"
+														alt="">
+														
+														<span  class="searhVenueUserTip">{{venue.tips[0].text}}</span>									
+												</div><!-- end of media -->	
+												
+
+											</li><!-- end of ng repeat venue -->
+											
+											<div class="SearchVenueLoadingContainer">	
+												<button
+													 class="btn btn-primary btn-md" 
+													 ng-disabled="loadMoreVenue" 
+													 ng-click="showMoreVenues()">
+													 Load More Venues
+													<i class="fa fa-spinner fa-spin" ng-if="toggleVenues"></i>
+												</button>
+											</div>
+										</ul><!-- end of search venue list -->						
+									</div><!-- end of col-md-6 -->
+									<div class="col-xs-12 col-sm-6 col-md-6" style="padding: 0">
+						
+										<div id="mapCanvas" style="width: 100%; height: 92%"></div>					
+									</div><!-- end of col-md-6 -->											
+						</div><!-- end of row -->
+				</div><!-- end of container -->
+
+  	
+	
     </div><!-- end of container -->
 
 
-
+		<script>
+			var venuesData = <%- JSON.stringify(venues) %>
+		</script>
     <!-- Libs -->
+		<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places&sensor=false"></script>
 
+		<script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
+		<script src="bower_components/leaflet/dist/leaflet.js"></script>
+		<script src="bower_components/jquery/dist/jquery.min.js"></script>
+		<script src="bower_components/angular/angular.min.js"></script>
+		<script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+		<script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+		<script src="bower_components/slick-carousel/slick/slick.min.js"></script>
+		<script src="bower_components/angular-slick/dist/slick.js"></script>
+		<script src="bower_components/swipebox/src/js/jquery.swipebox.js"></script>
+		
+		<script src="js/angularApp.js"></script>
+		<script src="js/venuesCtrl.js"></script>
   </body>
 </html>
 

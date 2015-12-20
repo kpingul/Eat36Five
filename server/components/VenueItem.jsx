@@ -4,7 +4,6 @@ var VenueItem = React.createClass({
 	render: function() {
 		return (
 			<li>
-
 				<div className="media">
 					<div className="media-left SearchVenuePhotoContainer">
 						<a href={"venue/" + this.props.venue.venue.id}>
@@ -44,7 +43,6 @@ var VenueItem = React.createClass({
 				</div>
 			</li>
 		);
-	
 	}
 });
 
