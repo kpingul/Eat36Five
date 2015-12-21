@@ -81,7 +81,8 @@
 
 			//Stores the SingleVenueData Service 
 			//implemented in the router 
-			$scope.venue  	 	 = venueData.venue;
+			// $scope.venue  	 	 = venueData.venue;
+			$scope.venue  	 	 = venueData;
 
 			//Limit of user reviews in the template
 			$scope.reviewLim 	 = 5;
@@ -90,9 +91,8 @@
 			$scope.slickBP 	 	 = slickBreakpoints.breakpoints;
 
 
-			$scope.venuePhotos   = venueData.photos;
-			console.log($scope.venuePhotos)
-			$scope.similarVenues = venueData.similarVenues;
+			// $scope.venuePhotos   = venueData.photos;
+			// $scope.similarVenues = venueData.similarVenues;
 
 
 
@@ -106,9 +106,9 @@
 			//Query to send to MapService
 			$scope.mapVenue = [
 				{
-					lat:  venueData.venue.location.lat, 
-					lng:  venueData.venue.location.lng, 
-					title:  venueData.venue.name
+					lat:  venueData.location.lat, 
+					lng:  venueData.location.lng, 
+					title:  venueData.name
 				}
 			];
 			//Call out to MapService to show map
