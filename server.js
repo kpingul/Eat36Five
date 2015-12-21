@@ -47,7 +47,43 @@ app.get('/venue/:id', function(req, res) {
 		//1). venue: venue information
 		//2). venuePhotos: venue photos
 		//3). 	similarVenues: similar venue information
-	res.send('hello');
+
+	async.parallel({
+	    venue: function(callback){
+				foursquare.venues.venue(req.params.id, {}, function(err, response) {
+					if(err) {
+						res.status(500).send({error: "error with API"});
+					}
+					callback(null,response.response.venue);
+				});
+				  
+	    },
+	    photos: function(callback){    
+				foursquare.venues.photos(req.params.id, {}, function(err, response) {
+					if(err) {
+						res.status(500).send({error: "error with API"});
+					}
+					callback(null,response.response.photos.groups[1].items);
+				});
+				
+	    },
+	    similarVenues: function(callback) {
+				foursquare.venues.similar(req.params.id, {}, function(err, response) {
+					if(err) {
+						res.status(500).send({error: "error with API"});
+					}
+					callback(null, response.response.similarVenues.items);
+				});
+	    }
+	},
+	function(err, results) {
+			if(err) {
+				console.log(err);
+			}
+			res.render('venue', {venue: results});
+	});	
+
+
 
 });
 
