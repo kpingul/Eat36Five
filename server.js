@@ -52,7 +52,7 @@ app.get('/venue/:id', function(req, res) {
 	    venue: function(callback){
 				foursquare.venues.venue(req.params.id, {}, function(err, response) {
 					if(err) {
-						res.status(500).send({error: "error with API"});
+						res.send('hello');
 					}
 					callback(null,response.response.venue);
 				});
@@ -61,7 +61,7 @@ app.get('/venue/:id', function(req, res) {
 	    photos: function(callback){    
 				foursquare.venues.photos(req.params.id, {}, function(err, response) {
 					if(err) {
-						res.status(500).send({error: "error with API"});
+						res.send('hello');
 					}
 					callback(null,response.response.photos.groups[1].items);
 				});
@@ -70,7 +70,7 @@ app.get('/venue/:id', function(req, res) {
 	    similarVenues: function(callback) {
 				foursquare.venues.similar(req.params.id, {}, function(err, response) {
 					if(err) {
-						res.status(500).send({error: "error with API"});
+						res.send('hello');
 					}
 					callback(null, response.response.similarVenues.items);
 				});
