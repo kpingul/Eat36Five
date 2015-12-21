@@ -78,7 +78,7 @@ app.get('/venue/:id', function(req, res) {
 	},
 	function(err, results) {
 			if(err) {
-				console.log(err);
+				res.send(err);
 			}
 			res.render('venue', {venue: results});
 	});	
