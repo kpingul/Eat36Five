@@ -4,6 +4,7 @@
     <base href="/">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0,user-scalable=no">
     <!-- CSS Libraries -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
  		<link rel="stylesheet" href="css/bootstrap.css">
  		<link rel="stylesheet" href="bower_components/slick-carousel/slick/slick-theme.css">
 		<link rel="stylesheet" href="bower_components/slick-carousel/slick/slick.css">
@@ -11,7 +12,6 @@
 		<link rel="stylesheet"  href="bower_components/leaflet/dist/leaflet.css">
     <!-- CSS stylesheets -->
     <link rel="stylesheet" href="css/stylesheet.css">
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 
     <title>Eat36Five</title>
   </head>
@@ -28,7 +28,7 @@
 				<div class="container-fluid">
 					<div class="navbar-header">
 						
-						<a class="navbar-brand" ui-sref="home">Eat36Five</a>
+						<a class="navbar-brand" ng-href="/">Eat36Five</a>
 					</div><!-- end of navbar header -->
 				</div><!-- end of container-fluid -->
 			</nav><!-- end of navigation bar -->
@@ -59,14 +59,14 @@
 					
 					</slick><!-- end of slick carousel -->
 					<h4 class="text-center" >
-					<a href="" venue-photo-gallery>See all photos</a>
+					<a venue-photo-gallery>See all photos</a>
 					</h4>
 					</div><!-- end of row -->
 					<div class="row">
 						<div class="col-md-8">
 							
 							<div class="panel panel-default">
-								<div class="panel-body" style="padding: 0; padding: 0px 20px">
+								<div class="panel-body" style="paddinvg: 0; padding: 0px 20px">
 									
 									<span class="addressName">
 										<h1>{{::venue.name}}</h1>
@@ -184,16 +184,15 @@
 							<h5><strong>You May Also Like</strong></h5>
 							<div
 								class="similarVenueContainer"
-								ng-repeat="(index, similarVenue) in similarVenues track by $index"
-								ng-click="viewSimilarVenue(similarVenues[index].id)">
+								ng-repeat="(index, similarVenue) in similarVenues track by $index">
 								
 								<address style="line-height: 1.1">
 									
-									<a class="similarVenueContainerLink" href="">
+									<a class="similarVenueContainerLink" ng-href="venue/{{similarVenue.id}}">
 										
 										<img class="pull-left similarVenueImg" ng-src="{{similarVenue.categories[0].icon.prefix}}bg_64{{similarVenue.categories[0].icon.suffix}}"/>
 										<h5>
-											<a href="">{{similarVenue.name}}</a>
+											<a ng-href="venue/{{similarVenue.id}}"><strong>{{similarVenue.name}}</strong> <small>(click for more details)</small></a>
 										</h5>
 										<p>{{similarVenue.categories[0].shortName}}</p>
 										<small>{{similarVenue.location.address}} ({{similarVenue.location.crossStreet}})</small>			
@@ -219,6 +218,7 @@
 
 		<script>
 			var venueData = <%- JSON.stringify(venue) %>
+			console.log(venueData);
 		</script>
     <!-- Libs -->
 		<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places&sensor=false"></script>

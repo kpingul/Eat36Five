@@ -75,13 +75,13 @@
 
 		.controller('VenueCtrl', VenueCtrl)
 
-		VenueCtrl.$inject = ['$scope','MapService','slickBreakpoints', '$state', '$timeout'];
+		VenueCtrl.$inject = ['$scope','MapService','slickBreakpoints', '$window', '$timeout'];
 
-		function VenueCtrl($scope,MapService, slickBreakpoints, $state,$timeout){
+		function VenueCtrl($scope,MapService, slickBreakpoints, $window,$timeout){
 
 			//Stores the SingleVenueData Service 
 			//implemented in the router 
-			$scope.venue  	 	 = venueData.response.venue;
+			$scope.venue  	 	 = venueData.venue;
 
 			//Limit of user reviews in the template
 			$scope.reviewLim 	 = 5;
@@ -90,8 +90,9 @@
 			$scope.slickBP 	 	 = slickBreakpoints.breakpoints;
 
 
-			// $scope.venuePhotos   = SingleVenuePhotos;
-			// $scope.similarVenues = SimilarVenueData;
+			$scope.venuePhotos   = venueData.photos;
+			console.log($scope.venuePhotos)
+			$scope.similarVenues = venueData.similarVenues;
 
 
 
@@ -105,19 +106,13 @@
 			//Query to send to MapService
 			$scope.mapVenue = [
 				{
-					lat: venueData.response.venue.location.lat, 
-					lng: venueData.response.venue.location.lng, 
-					title: venueData.response.venue.name
+					lat:  venueData.venue.location.lat, 
+					lng:  venueData.venue.location.lng, 
+					title:  venueData.venue.name
 				}
 			];
 			//Call out to MapService to show map
 			MapService.getSearchVenueMap($scope.mapVenue);
-
-			$scope.viewSimilarVenue = function(venueID){
-				//redirects user to current page 
-				//but with different venue request
-				$state.go('venue', {venueID: venueID});
-			};
 
 
 			$scope.loadMoreReviews = function() {
@@ -196,8 +191,7 @@
 					//activate swipebox with venue photos
 					//@params accepts an array of objects
 					//with href and title properties
-					// $.swipebox(scope.venuePhotos);
-					
+					$.swipebox(photoMixin(scope.venuePhotos));
 
 				});
 
@@ -206,7 +200,32 @@
 			}
 		}
 
+		function photoMixin(photos) {
+			var photoMixins = [],
+					photoSize = 'original';
+					
+			photos.map( function(item, index) {
 
+				//checks for user information since
+				//not all users include a last name or firstName
+				if(item.user.lastName){
+					photoMixins.push({
+						href: item.prefix + photoSize + item.suffix,
+						title: item.user.firstName + ' ' + item.user.lastName
+					});
+
+				}else{
+
+					photoMixins.push({
+						href: item.prefix + photoSize + item.suffix,
+						title: item.user.firstName
+					});
+				}
+
+			});
+
+			return photoMixins;
+		}
 
 		function MapService(){
 

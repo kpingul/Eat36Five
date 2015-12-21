@@ -1,6 +1,6 @@
 require('node-jsx').install({ extension: '.jsx' })
-
 var express = require('express'),
+	async    = require('async'),
 	request = require('supertest'),
 	port    = process.env.PORT || 3000,
 	foursquare = require('node-foursquare-venues')('RHV1ZD3K1SPFECIGDWMOXRVQ3TGNQTUGA0QF1K1GQJ0EICIF', '4RJLQAZNTF2LE4DCSBHJKNC1BBHDUEQBSHIAFCML4GYPXGNQ');
@@ -54,26 +54,43 @@ app.get('/venue/:id', function(req, res) {
 		//2). venuePhotos: venue photos
 		//3). 	similarVenues: similar venue information
 
-	foursquare.venues.venue(req.params.id, {}, function(err, response) {
-		if(err) 
-			res.status(500).send({error: "error with API"});
-		res.render('venue', {venue: response});
-	});
+	async.parallel({
+	    venue: function(callback){
+				foursquare.venues.venue(req.params.id, {}, function(err, response) {
+					if(err) {
+						res.status(500).send({error: "error with API"});
+					}
+					callback(null,response.response.venue);
+				});
+				  
+	    },
+	    photos: function(callback){    
+				foursquare.venues.photos(req.params.id, {}, function(err, response) {
+					if(err) {
+						res.status(500).send({error: "error with API"});
+					}
+					callback(null,response.response.photos.groups[1].items);
+				});
+				
+	    },
+	    similarVenues: function(callback) {
+				foursquare.venues.similar(req.params.id, {}, function(err, response) {
+					if(err) {
+						res.status(500).send({error: "error with API"});
+					}
+					callback(null, response.response.similarVenues.items);
+				});
+	    }
+	},
+	function(err, results) {
+	    // results is now equals to: {one: 1, two: 2}
+			if(err) {
+				console.log(err);
+			}
+			res.render('venue', {venue: results});
+	});	
 
-	// foursquare.venues.photos(req.params.id, {}, function(err, response) {
-	// 	if(err) {
-	// 		res.status(500).send({error: "error with API"});
-	// 	}
-	// 	res.send(response);
-	// });
-	
 
-	// foursquare.venues.similar(req.params.id, {}, function(err, response) {
-	// 		if(err) {
-	// 			res.status(500).send({error: "error with API"});
-	// 		}
-	// 		res.send(response);
-	// 	});
 
 });
 

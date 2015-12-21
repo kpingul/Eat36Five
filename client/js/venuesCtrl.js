@@ -95,7 +95,7 @@
 
 
 
-				function MapService(){
+		function MapService(){
 
 			var mapService = {
 
@@ -157,7 +157,7 @@
 				}
 			
         
-		    }
+		  }
 
 
 			return mapService;
