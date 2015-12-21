@@ -90,8 +90,7 @@ app.get('/venue/:id', function(req, res) {
 });
 
 //Startup Server
-var server = app.listen(port, function() {
+app.listen(port, function() {
 	console.log('listening on port ' + port);
 });
 
-module.exports = server;
