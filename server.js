@@ -1,7 +1,6 @@
 
 var express = require('express'),
 	async    = require('async'),
-	request = require('supertest'),
 	port    = process.env.PORT || 3000,
 	foursquare = require('node-foursquare-venues')('RHV1ZD3K1SPFECIGDWMOXRVQ3TGNQTUGA0QF1K1GQJ0EICIF', '4RJLQAZNTF2LE4DCSBHJKNC1BBHDUEQBSHIAFCML4GYPXGNQ'),
 	app     = express();
