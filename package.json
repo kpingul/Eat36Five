@@ -4,8 +4,7 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js",
-    "test": "mocha server/tests -R spec && karma start karma.conf.js --single-run"
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
