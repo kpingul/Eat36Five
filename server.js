@@ -1,15 +1,10 @@
-require('node-jsx').install({ extension: '.jsx' })
+
 var express = require('express'),
 	async    = require('async'),
 	request = require('supertest'),
 	port    = process.env.PORT || 3000,
-	foursquare = require('node-foursquare-venues')('RHV1ZD3K1SPFECIGDWMOXRVQ3TGNQTUGA0QF1K1GQJ0EICIF', '4RJLQAZNTF2LE4DCSBHJKNC1BBHDUEQBSHIAFCML4GYPXGNQ');
-	React   = require('react'),
-	ReactDOMServer = require('react-dom/server'),
-	myComponent = require("./server/components/VenuesList.jsx"),
-	ReactComponent = React.createFactory(myComponent),
+	foursquare = require('node-foursquare-venues')('RHV1ZD3K1SPFECIGDWMOXRVQ3TGNQTUGA0QF1K1GQJ0EICIF', '4RJLQAZNTF2LE4DCSBHJKNC1BBHDUEQBSHIAFCML4GYPXGNQ'),
 	app     = express();
-
 
 
 
