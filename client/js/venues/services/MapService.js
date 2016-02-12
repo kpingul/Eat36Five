@@ -1,9 +1,6 @@
-
 (function(){
-
   'use strict';
-
-  angular.module('myApp')
+  angular.module('VenuesApp')
 
     .factory('MapService', MapService)
 

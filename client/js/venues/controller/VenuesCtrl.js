@@ -1,6 +1,6 @@
 (function() {
   'use strict';
-    angular.module('myApp')
+    angular.module('VenuesApp')
       .controller('VenuesCtrl', VenuesCtrl)
       
       //Inject the dependencies to the Venues Controller
@@ -16,13 +16,10 @@
         vm.venueLimit   = 5;
         vm.loadMoreVenue = false;
         vm.toggleVenues = false;
+        vm.venues       = venuesData;
+        MapService.getSearchVenueMap(vm.venues);
+        vm.allMarkers = MapService.getAllMarkers();
 
-        if( venuesData.length  > 0 ){
-          vm.venues       = venuesData;
-          
-          MapService.getSearchVenueMap(vm.venues);
-          vm.allMarkers = MapService.getAllMarkers();
-        }
         // Returns a duplicate of val 
         //(x) amount of times
         vm.duplicate = function(val, times){
@@ -40,13 +37,12 @@
           if( vm.venues.length == vm.venueLimit ) {
             vm.loadMoreVenue = true;  
           }
-
           vm.toggleVenues = true; 
-          
-          $timeout(function(){
+          var clearTimeout = $timeout(function(){
             vm.toggleVenues = false;
             vm.venueLimit += 5;
           }, 450);
+
         }
 
       }

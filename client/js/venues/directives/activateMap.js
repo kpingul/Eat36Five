@@ -1,6 +1,6 @@
 (function() {
   'use strict';
-  angular.module('myApp')
+  angular.module('VenuesApp')
     .directive('activateMap', activateMap);
     function activateMap() {
       return {
