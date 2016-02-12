@@ -157,11 +157,9 @@
 					menu  = value.filter( function( item, index) {
 
 							if(item.name === "Menus"){
-						
 								return item;
 							}
 							if(item.name === "Drinks"){
-						
 								return item;
 							}
 					});

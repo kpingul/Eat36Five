@@ -9,11 +9,10 @@
     <!-- CSS stylesheets -->
     <link rel="stylesheet" href="css/stylesheet.css">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-
     <title>Eat36Five</title>
   </head>
 
-  <body ng-controller="VenuesCtrl" ng-cloak>
+  <body ng-controller="VenuesCtrl as vm" ng-cloak>
 	
     <!--_____________________-->
     <!--    Main Container   -->
@@ -39,15 +38,18 @@
 									<div class="col-xs-12 col-sm-6 col-md-6 searchVenueContainer">
 									
 										<ul class="searchVenueList">
-											<li ng-repeat="venue in venues | orderBy: sortType |limitTo: venueLimit track by $index " ng-mouseover="actMap(venue.venue.location.lat)" activate-map data="{{venue.venue.location.lat}}">
+											<li 
+												ng-repeat="venue in vm.venues | orderBy: sortType |limitTo: venueLimit track by $index " 
+												ng-mouseover="actMap(venue.venue.location.lat)" 
+												activate-map data="{{venue.venue.location.lat}}">
 
 				 								<div class="media">
 													<div class="media-left SearchVenuePhotoContainer">
 														<a ng-href="/venue/{{venue.venue.id}}">
 															<img
-															class="media-object SearchVenuePhoto"
-															ng-src="{{venue.venue.photos.groups[0].items[0].prefix}}300x300{{venue.venue.photos.groups[0].items[0].suffix}}"
-															alt="...">
+																class="media-object SearchVenuePhoto"
+																ng-src="{{venue.venue.photos.groups[0].items[0].prefix}}300x300{{venue.venue.photos.groups[0].items[0].suffix}}"
+																alt="...">
 														</a>
 														
 														</div><!-- end of media-left -->
@@ -89,10 +91,10 @@
 											<div class="SearchVenueLoadingContainer">	
 												<button
 													 class="btn btn-primary btn-md" 
-													 ng-disabled="loadMoreVenue" 
-													 ng-click="showMoreVenues()">
+													 ng-disabled="vm.loadMoreVenue" 
+													 ng-click="vm.showMoreVenues()">
 													 Load More Venues
-													<i class="fa fa-spinner fa-spin" ng-if="toggleVenues"></i>
+													<i class="fa fa-spinner fa-spin" ng-if="vm.toggleVenues"></i>
 												</button>
 											</div>
 										</ul><!-- end of search venue list -->						
@@ -114,8 +116,6 @@
 		</script>
     <!-- Libs -->
 		<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=places&sensor=false"></script>
-
-		<script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
 		<script src="bower_components/leaflet/dist/leaflet.js"></script>
 		<script src="bower_components/jquery/dist/jquery.min.js"></script>
 		<script src="bower_components/angular/angular.min.js"></script>
@@ -124,9 +124,12 @@
 		<script src="bower_components/slick-carousel/slick/slick.min.js"></script>
 		<script src="bower_components/angular-slick/dist/slick.js"></script>
 		<script src="bower_components/swipebox/src/js/jquery.swipebox.js"></script>
-		
+		<!-- Application -->		
 		<script src="js/angularApp.js"></script>
 		<script src="js/venuesCtrl.js"></script>
+		<script src="js/venues/controller/VenuesCtrl.js"></script>
+		<script src="js/venues/directives/activateMap.js"></script>
+		<script src="js/venues/services/MapService.js"></script>
   </body>
 </html>
 
