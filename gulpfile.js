@@ -75,11 +75,13 @@ gulp.task('scripts', function(){
 gulp.task('styles', function(){
 
   return gulp.src([
-      paths.css + 'bootstrap.css',
+      paths.bower + 'slick-carousel/slick/slick-theme.css',
+      paths.bower + 'slick-carousel/slick/slick.css',
+      paths.bower + 'swipebox/src/css/swipebox.css',
       paths.bower + 'leaflet/dist/leaflet.css',
       paths.css + 'stylesheet.css'
     ])
-    .pipe(concat('stylesheet.min.css'))
+    .pipe(concat('stylesheetVenue.min.css'))
     .pipe(minifyCss())
     .pipe(gulp.dest('client/build'));
 });
