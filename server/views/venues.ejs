@@ -1,4 +1,4 @@
-<html lang="en" ng-app="VenuesApp">
+<html lang="en">
   <head>
     <meta charset="UTF-8">
     <base href="/">
@@ -9,107 +9,94 @@
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <title>Eat36Five</title>
   </head>
-
-  <body ng-controller="VenuesCtrl as vm" >
-	
+  <body ng-app="VenuesApp">
     <!--_____________________-->
     <!--    Main Container   -->
     <!--_____________________-->
-    <div class="OuterMainContainer  ">
-  		
-
-				<nav class="navbar navbar-default" style="margin-bottom: 0px">
-					<div class="container-fluid">
-						<div class="navbar-header">	
-							<a class="navbar-brand" href="/">Eat36Five</a>
-						</div><!-- end of navbar header -->
-					</div><!-- end of container-fluid -->
-				</nav><!-- end of navigation bar -->
+    <div 
+    	ng-controller="VenuesCtrl as vm"
+    	class="OuterMainContainer">
 				
-					<div class="containers">
-						<div class="row">
-							<div class="col-xs-12 col-sm-6 col-md-6 searchVenueContainer">
-							
-								<ul class="searchVenueList" ng-cloak>
-									<li 
-										ng-repeat="venue in vm.venues | orderBy: sortType |limitTo: vm.venueLimit track by $index " 
-										ng-mouseover="actMap(venue.venue.location.lat)" 
-										activate-map data="{{venue.venue.location.lat}}">
+				<% include partials/nav.ejs %>
 
-		 								<div class="media">
-											<div class="media-left SearchVenuePhotoContainer">
-												<a ng-href="/venue/{{venue.venue.id}}">
-													<img
-														class="media-object SearchVenuePhoto"
-														ng-src="{{venue.venue.photos.groups[0].items[0].prefix}}300x300{{venue.venue.photos.groups[0].items[0].suffix}}"
-														alt="...">
-												</a>
-												
-												</div><!-- end of media-left -->
-												<div class="media-body searchVenueBody">
-													<p>
-														<span class="searchVenueIndex">{{$index + 1}}</span>. <span class="searchVenueRating">{{venue.venue.rating}}</span>
-														<small>Click for more details...</small>
-													</p>
-													<h4 class="media-heading">
-													<a  ng-href="/venue/{{venue.venue.id}}">{{venue.venue.name}}</a>
-													</h4>
-													<strong>{{duplicate(venue.venue.price.currency, venue.venue.price.tier)}}</strong> &middot; {{venue.venue.categories[0].name}}<br>
-													{{venue.venue.hours.status}}
-												</div><!-- end of media body -->
-													
-												<div class="media-right searchVenueAddressContainer">
-														
-													<address class="searchVenueAddress">
-														{{venue.venue.location.address}}<br>
-														{{venue.venue.location.city}},{{venue.venue.location.state}}<br>
-														{{venue.venue.contact.formattedPhone}}
-													</address>
-												</div><!-- end of media right -->
-										</div><!-- end of media -->
-													
-										<div class="media" style="line-height: 1em">
-											
-											<img
-												class="SearchVenueUserPhoto"
-												ng-src="{{venue.tips[0].user.photo.prefix}}300x300{{venue.tips[0].user.photo.suffix}}"
-												alt="">
-												
-												<span  class="searhVenueUserTip">{{venue.tips[0].text}}</span>									
-										</div><!-- end of media -->	
-										
-
-									</li><!-- end of ng repeat venue -->
-									
-									<div class="SearchVenueLoadingContainer">	
-										<button
-											 class="btn btn-primary btn-md" 
-											 ng-disabled="vm.loadMoreVenue" 
-											 ng-click="vm.showMoreVenues()">
-											 Load More Venues
-											<i class="fa fa-spinner fa-spin" ng-if="vm.toggleVenues"></i>
-										</button>
-									</div>
-								</ul><!-- end of search venue list -->						
-							</div><!-- end of col-md-6 -->
-							<div class="col-xs-12 col-sm-6 col-md-6" style="padding: 0">
-				
-								<div id="mapCanvas" style="width: 100%; height: 92%"></div>					
-							</div><!-- end of col-md-6 -->											
-				</div><!-- end of row -->
+				<div class="containers">
+					<div class="row">
+						<div class="col-xs-12 col-sm-6 col-md-6 searchVenueContainer">
+							<ul class="searchVenueList" ng-cloak>
+								<li 
+									ng-repeat="venue in vm.venues | orderBy: sortType |limitTo: vm.venueLimit track by $index " 
+									ng-mouseover="actMap(venue.venue.location.lat)" 
+									activate-map data="{{venue.venue.location.lat}}">
+	 								<div class="media">
+										<div class="media-left SearchVenuePhotoContainer">
+											<a ng-href="/venue/{{venue.venue.id}}">
+												<img
+													class="media-object SearchVenuePhoto"
+													ng-src="{{venue.venue.photos.groups[0].items[0].prefix}}300x300{{venue.venue.photos.groups[0].items[0].suffix}}">
+											</a>
+										</div><!-- end of media-left -->
+										<div class="media-body searchVenueBody">
+											<p>
+												<span class="searchVenueIndex">{{$index + 1}}</span>. 
+												<span class="searchVenueRating">{{venue.venue.rating}}</span>
+												<small>Click for more details...</small>
+											</p>
+											<h4 class="media-heading">
+											<a  ng-href="/venue/{{venue.venue.id}}">{{venue.venue.name}}</a>
+											</h4>
+											<strong>
+												{{duplicate(venue.venue.price.currency, venue.venue.price.tier)}}
+											</strong> &middot; 
+											{{venue.venue.categories[0].name}}<br>
+											{{venue.venue.hours.status}}
+										</div><!-- end of media body -->
+										<div class="media-right searchVenueAddressContainer">
+											<address class="searchVenueAddress">
+												{{venue.venue.location.address}}<br>
+												{{venue.venue.location.city}},{{venue.venue.location.state}}<br>
+												{{venue.venue.contact.formattedPhone}}
+											</address>
+										</div><!-- end of media right -->
+									</div><!-- end of media -->
+									<div class="media" style="line-height: 1em">
+										<img
+											class="SearchVenueUserPhoto"
+											ng-src="{{venue.tips[0].user.photo.prefix}}300x300{{venue.tips[0].user.photo.suffix}}"
+											alt="">
+											<span  class="searhVenueUserTip">{{venue.tips[0].text}}</span>									
+									</div><!-- end of media -->	
+								</li><!-- end of ng repeat venue -->
+								<div class="SearchVenueLoadingContainer">	
+									<button
+										 class="btn btn-primary btn-md" 
+										 ng-disabled="vm.loadMoreVenue" 
+										 ng-click="vm.showMoreVenues()">
+										 Load More Venues
+										<i class="fa fa-spinner fa-spin" ng-if="vm.toggleVenues"></i>
+									</button>
+								</div>
+							</ul><!-- end of search venue list -->						
+						</div><!-- end of col-md-6 -->
+						<div class="col-xs-12 col-sm-6 col-md-6" style="padding: 0">
+							<div id="mapCanvas" style="width: 100%; height: 92%"></div>					
+						</div><!-- end of col-md-6 -->											
+			</div><!-- end of row -->
 		</div><!-- end of container -->
-
-  	
-	
-   </div><!-- end of container -->
-
-
-		<script>
+   </div><!-- end of  main container -->
+		
+		<!--
+			** server side data being generated into template
+				 since angular does not have server side rendering
+		-->
+		<script async >
+			/*
+				Data attached to global but a really bad practice 
+			*/
 			var venuesData = <%- JSON.stringify(venues) %>
 		</script>
     <!-- Libs -->
-		<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=places&sensor=false"></script>
-		<script src="bower_components/leaflet/dist/leaflet.js"></script>
+		<script defer type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=places&sensor=false"></script>
+		<script defer src="bower_components/leaflet/dist/leaflet.js"></script>
 		<script src="build/libDepsJs.min.js"></script>
 
 		<!-- Application -->		

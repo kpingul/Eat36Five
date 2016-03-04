@@ -16,7 +16,7 @@ Eat36Five is an application <b>that helps people</b> find new spots to eat. The 
 
 * Client: <a href="http://angularjs.org">AngularJS</a> Framework (HTML enhanced for web apps!)
 * CSS: [Twitter's bootstrap](http://getbootstrap.com/)
-* Backend: <a href="https://developer.foursquare.com/">FourSquare API</a>
+* Server: <a href="https://developer.foursquare.com/">FourSquare API</a>
 
 ###Build
 
@@ -64,13 +64,15 @@ Since the client application is built using AngularJS and other 3rd party librar
 
 <b>Package.json</b>
 <pre>
+  "async": "^1.5.0",
+  "ejs": "^2.3.4",
+  "express": "^4.13.3",
+  "gulp": "^3.9.1",
   "gulp-concat": "^2.6.0",
-  "gulp-jshint": "^1.11.2",
-  "gulp-minify-css": "^1.2.0",
+  "gulp-minify-css": "^1.2.3",
   "gulp-rename": "^1.2.2",
-  "gulp-uglify": "^1.2.0",
-  "jshint-stylish": "^2.0.1"
-
+  "gulp-uglify": "^1.5.2",
+  "node-foursquare-venues": "^1.1.0",
 </pre>
 
 * To install our npm dependencies for our build system and server, run: 

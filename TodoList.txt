@@ -1,22 +1,15 @@
 
 Eat36Five Check List --
 
-1). Venue List / Venue Item refactoring and moving the ng directive binding to react syntax
+1). Client
+	-refactor venue folder structure
+	-compress assets/build system 
+	-font awesome network request slows down load time
+	-caching browser/local storage images
 
-2). Mulitple Venues
-	Check for React Library dependencies
-	-Leaflet
-	-google maps box
-	
+	New Feature Ideas
+		-data visualization by comparing restaurants data against similar venues
 
-	Single Venue Page
-	-slick  (ken wheeler ) 
-	-swipebox 
-
-3). Testing Issues
-	
-	-find a way to test express routes with the foursquare services
-
-	-fnd a way to test the react components 
-
-	
+2). Server
+	-partial organization
+	-async parallel calls for similar venues, venue photos, ect

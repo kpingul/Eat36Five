@@ -61,10 +61,10 @@ gulp.task('libDepsJs', function(){
 gulp.task('scripts', function(){
 
   return gulp.src([
-      paths.js + 'venues/VenuesApp.js',
-      paths.js + 'venues/**/*.js'
+      paths.js + 'venue/VenueApp.js',
+      paths.js + 'venue/**/*.js'
     ])
-    .pipe(concat('VenuesApp.min.js'))
+    .pipe(concat('VenueApp.min.js'))
     .pipe(uglify())
     .pipe(gulp.dest('client/build'));
 });

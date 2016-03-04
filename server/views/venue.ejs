@@ -17,23 +17,17 @@
     <title>Eat36Five</title>
   </head>
 
-  <body ng-controller="VenueCtrl" ng-cloak>
+  <body ng-controller="VenueCtrl">
 	
     <!--_____________________-->
     <!--    Main Container   -->
     <!--_____________________-->
-    <div class="OuterMainContainer  ">
+    <div class="OuterMainContainer">
 								
 
-			<nav class="navbar navbar-default" style="margin-bottom: 0px">
-				<div class="container-fluid">
-					<div class="navbar-header">
-						
-						<a class="navbar-brand" ng-href="/">Eat36Five</a>
-					</div><!-- end of navbar header -->
-				</div><!-- end of container-fluid -->
-			</nav><!-- end of navigation bar -->
-			<div class="container VenueContainer">
+			<% include partials/nav.ejs %>
+
+			<div class="container VenueContainer"  ng-cloak>
 				
 				<div class="row">
 					
@@ -204,16 +198,9 @@
 					</div><!-- end of row-->
 			</div>	<!-- end of container -->
 
-			<div class="footer">
-				<p>
-					<span style="float: left">@Eat36Five</span>
-					<span style="float: right">Created by Kirck Pingul</span>
-				</p>
-			</div>  		
+			<% include partials/footer.ejs %>
 
 
-  	
-	
     </div><!-- end of container -->
 
 
@@ -226,7 +213,8 @@
 
 		<script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
 		<script src="build/libDepsJs.min.js"></script>		
-		<script src="js/venue/VenueApp.js"></script>
+		<script src="build/VenueApp.min.js"></script>
+
   </body>
 </html>
 

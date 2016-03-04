@@ -4,101 +4,98 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0,user-scalable=no">
 		<!-- CSS Libraries -->
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-		<link rel="stylesheet" href="css/bootstrap.css">
 		<!-- CSS stylesheets -->
-		<link rel="stylesheet" href="css/stylesheet.css">
+		<link rel="stylesheet" href="build/stylesheet.min.css">
 		<title>Eat36Five | home</title>
 	</head>
-
 	<body>
 		<!--_____________________-->
 		<!--    Main Container   -->
 		<!--_____________________-->
-		<div class="OuterMainContainer  ">
+		<div class="OuterMainContainer">
 			<div class="Main_Search">
-			    <div class="container">
-			    		<nav>
-			          <h3>
-			            <span href="/" class="middle-title">
-			            	Eat36Five
-			            </span> 
-			            <span class="middle-about">
-			            	<a href="/about">About us</a>
-			            </span>
-			          </h3>
-			        </nav>
-			          <div class="middle-form-section">
-			            <p class="middle-title-2">
-			            	Feeling Hungry?
-			            </p>
-			            <p class="middle-title-1">
-			            	<strong>We're</strong> here to help!
-			            </p>
+			   <div class="container">
+		    		<nav>
+		          <h3>
+		            <span href="/" class="middle-title">
+		            	Eat36Five
+		            </span> 
+		            <span class="middle-about">
+		            	<a href="/about">About us</a>
+		            </span>
+		          </h3>
+		        </nav>
+	          <div class="middle-form-section">
+	            <p class="middle-title-2">
+	            	Feeling Hungry?
+	            </p>
+	            <p class="middle-title-1">
+	            	<strong>We're</strong> here to help!
+	            </p>
+	            <!-- 
+	            	Server side rendering request to node 
+	            	application server for venues ejs template 
+	           	-->
+	            <form  
+	            	id="form" 
+	            	class="form-inline" 
+	            	method="GET"  
+	            	action="/venues">
+	              <label for="locationTerm" class="middle-title-3">
+	              	Your Location
+	              </label>
+	              <div class="middle-form">
+	                <div class="input-group">
+	                  <input 
+	                    type="text" 
+	                    id="input" 
+	                    class="form-control" 
+	                    placeholder="e.g. 102 Mission St, San Francisco" 			             		       
+	                    required>
+		            		<!-- 
+		            			lat and lng contain the values of the locations 
+											latitude and longitude using the jquery geocomplete
+											plugin
+		            		-->
+										<input name="lat" type="text" value="" class="hide">
+		 								<input name="lng" type="text" value="" class="hide">
+	                  <span class="input-group-btn">
+	                    <button 
+	                    	class="btn btn-default middle-form-button" id="search" style="cursor: auto">
+	                      <i class="fa fa-map-pin"></i>
+	                    </button>
+	                  </span>
+	                  </div><!-- /input-group -->
+	              </div><!-- end of middle form -->
+	              <label for="searchTerm" class="middle-title-3">
+	              	Your Search Term
+	              </label>
+	               <div class="middle-form">
+	                  <div class="input-group">
+	                    <input 
+	                      id="input" 
+	                      type="text" 
+	                      class="form-control" 
+	                      name="searchTerm" 
+	                      placeholder="e.g. Steak or Pizza" 
+	                      required>
+	                    <span class="input-group-btn">
+	                      <button class="btn btn-default middle-form-button" id="search" type="submit">
+	                        Search
+	                      </button>
+	                    </div><!-- /input-group -->
+	                  </div><!-- ened of middle-form -->
 
-			            <!-- 
-			            	Server side rendering request to node 
-			            	application server for venues ejs template 
-			           	-->
-			            <form  
-			            	id="form" 
-			            	class="form-inline" 
-			            	method="GET"  
-			            	action="/venues">
-			              
-			              <label for="locationTerm" class="middle-title-3">Your Location</label>
-			              <div class="middle-form">
-			                <div class="input-group">
-			                  <input 
-			                    type="text" 
-			                    id="input" 
-			                    class="form-control" 
-			                    placeholder="e.g. 102 Mission St, San Francisco" 			             		       
-			                    required>
-
-				            		<!-- 
-				            			lat and lng contain the values of the locations 
-													latitude and longitude using the jquery geocomplete
-													plugin
-				            		-->
-												<input name="lat" type="text" value="" class="hide">
-				 								<input name="lng" type="text" value="" class="hide">
-			                  
-			                  <span class="input-group-btn">
-			                    <button 
-			                    	class="btn btn-default middle-form-button" id="search" style="cursor: auto">
-			                      <i class="fa fa-map-pin"></i>
-			                    </button>
-			                  </span>
-			                  </div><!-- /input-group -->
-			              </div><!-- end of middle form -->
-			               
-
-			              <label for="searchTerm" class="middle-title-3">Your Search Term</label>
-			               <div class="middle-form">
-			                  <div class="input-group">
-			                    <input 
-			                      id="input" 
-			                      type="text" 
-			                      class="form-control" 
-			                      name="searchTerm" 
-			                      placeholder="e.g. Steak or Pizza" 
-			                      required>
-			                    <span class="input-group-btn">
-			                      <button class="btn btn-default middle-form-button" id="search" type="submit">
-			                        Search
-			                    <!--     <i class="fa fa-spinner fa-spin" ></i> -->
-			                      </button>
-			                    </div><!-- /input-group -->
-			                  </div><!-- ened of middle-form -->
-
-			                  <!-- ERROR handling -->
-			            <!--         <div class="alert alert-info" role="alert" style=" margin-top: 13px; color: #123D52">
-			                      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-			                      <strong>Cannot find any results with (search term here...) , please enter another search term.</strong>
-			                    </div> -->
-			              </form><!-- end of form -->
-			          </div>
-			        </div>
+			              <!-- ERROR handling -->
+			            	<!--         
+            					<div class="alert alert-info" role="alert" style=" margin-top: 13px; color: #123D52">
+                      	<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                      	<strong>Cannot find any results with (search term here...) , please enter another search term.</strong>
+                    	</div> 
+										-->
+			        </form><!-- end of form -->
+			      </div>
+			    </div>
 			</div><!-- end of Main Search -->
 	    <div class="row">
 	      <div class="col-md-12">
@@ -116,42 +113,49 @@
 	          <i class="fa fa-circle fa-stack-2x "></i>
 	          <i class="fa fa-map-marker fa-stack-1x fa-inverse"></i>
 	        </span>
-	        <h4 class="search_description_st_title"><b>Enter Your Location</b></h4>
-	        <p class="search_description_st_description">Enter your current location by typing in your current address or city. Examples: 1031 Market St. San Francisco, Ca</p>
+	        <h4 class="search_description_st_title">
+	        	<b>Enter Your Location</b>
+	        </h4>
+	        <p class="search_description_st_description">
+	        	Enter your current location by typing in your current address or city. Examples: 1031 Market St. San Francisco, Ca
+	        </p>
 	      </div><!-- end of col md 4 -->
 	      <div class="col-md-4">
 	        <span class="fa-stack fa-4x">
 	          <i class="fa fa-circle fa-stack-2x "></i>
 	          <i class="fa fa fa-search fa-stack-1x fa-inverse"></i>
 	        </span>
-	        <h4  class="search_description_st_title" ><b>Enter Search Term</b></h4>
-	        <p class="search_description_st_description">Enter the type of food or restaurant you're looking for. Examples: pizza, chicken sandwich, oysters, shrimp, etc.</p>
+	        <h4  class="search_description_st_title">
+	        	<b>Enter Search Term</b>
+	        </h4>
+	        <p class="search_description_st_description">
+	        	Enter the type of food or restaurant you're looking for. Examples: pizza, chicken sandwich, oysters, shrimp, etc.
+	        </p>
 	      </div> <!-- end of col md 4 --> 
 	      <div class="col-md-4">
 	        <span class="fa-stack fa-4x">
 	          <i class="fa fa-circle fa-stack-2x "></i>
 	          <i class="fa fa fa-list fa-stack-1x fa-inverse"></i>
 	        </span>
-	        <h4  class="search_description_st_title" ><b>Results will be displayed</b></h4>
-	        <p class="search_description_st_description">We will generate a list of possible options around your area based on the desired term.</p>
+	        <h4  class="search_description_st_title" >
+	        	<b>Results will be displayed</b>
+	        </h4>
+	        <p class="search_description_st_description">
+	        	We will generate a list of possible options around your area based on the desired term.
+	        </p>
 	      </div><!-- end of col md 4 -->
 	    </div><!-- end of search options -->
 
-	  <div class="footer">
-	    <p>
-	      <span style="float: left">@Eat36Five</span>
-	      <span style="float: right">Created by Kirck Pingul</span>
-	    </p>
-	  </div>
+
+		  <% include partials/footer.ejs %>
 	</div><!-- end of container -->
 
 		<!-- Libs -->
+		<script src="https://maps.googleapis.com/maps/api/js?libraries=places&sensor=false"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-alpha1/jquery.min.js"></script>
+		<script src="bower_components/jquerygeo/jquery.geocomplete.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-		<script src="libs/jquery.geocomplete.js"></script>
-		<script  src="https://maps.googleapis.com/maps/api/js?libraries=places&sensor=false"></script>
-
 		<!-- Application Files -->
-		<script src="js/jqueryPluginInit.js"></script>
+		<script  src="js/jqueryPluginInit.js"></script>
 	</body>
 </html>
