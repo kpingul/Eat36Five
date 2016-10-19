@@ -16,7 +16,7 @@ Eat36Five is an application <b>that helps people</b> find new spots to eat. The 
 
 * Client: <a href="http://angularjs.org">AngularJS</a> Framework (HTML enhanced for web apps!)
 * CSS: [Twitter's bootstrap](http://getbootstrap.com/)
-* Server: <a href="https://developer.foursquare.com/">FourSquare API</a>
+* Server: Node/ExpressJS
 
 ###Build
 
