@@ -20,7 +20,7 @@ Eat36Five is an application <b>that helps people</b> find new spots to eat. The 
 * powered by [Gulp.js](http://www.gulpjs.com/)
 * build supporting JSLinting, JavaScript and CSS  minification.
 
-##Installation
+## Installation
 
 ### Platform & Tools
 
@@ -86,7 +86,7 @@ Since the client application is built using AngularJS and other 3rd party librar
 * Once it brings up the server, you can start browsing through the application at http://localhost:3000
  
  
-##Browser Support
+## Browser Support
  
 AngularJS and Bootstrap will work with the latest versions of Chrome, Firefox, Safari, and Opera, as well as Internet Explorer version 9, 10, and 11. As for IE8 and below, you might have to work some magic.
 
