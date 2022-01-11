@@ -3,10 +3,7 @@
 
 # Eat36Five
 
-***
-
 #### The sample demo can be found <a href="http://eat36five.herokuapp.com"><b>here</b></a>
-
 
 ## Purpose
 
