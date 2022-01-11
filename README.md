@@ -1,37 +1,37 @@
 
 <img src="https://travis-ci.org/kpingul/Eat36Five.svg?branch=master"/>
 
-##Eat36Five
+# Eat36Five
 
 ***
 
-####The sample demo can be found <a href="http://eat36five.herokuapp.com"><b>here</b></a>
+#### The sample demo can be found <a href="http://eat36five.herokuapp.com"><b>here</b></a>
 
 
-##Purpose
+## Purpose
 
 Eat36Five is an application <b>that helps people</b> find new spots to eat. The main focus of the app was to highlight FourSquare's developer API's and use Node.js to setup the RESTful API to connect to FourSquare. The application uses best practices when it comes to: <b>folders structure</b>, <b>modularity</b>, <b>organizing navigation</b>, and building <b>a simple interface</b>.
 
-##Stack
+## Stack
 
 * Client: <a href="http://angularjs.org">AngularJS</a> Framework (HTML enhanced for web apps!)
 * CSS: [Twitter's bootstrap](http://getbootstrap.com/)
 * Server: Node/ExpressJS
 
-###Build
+### Build
 
 * powered by [Gulp.js](http://www.gulpjs.com/)
 * build supporting JSLinting, JavaScript and CSS  minification.
 
 ##Installation
 
-###Platform & Tools
+### Platform & Tools
 
 You need to install [Node.js](http://nodejs.org/) and then the development tools. Node.js comes with a package manager called [npm](http://npmjs.org) for installing NodeJS applications and libraries.
 * [Install node.js](http://nodejs.org/download/) (requires node.js => v0.12.7)
 * [Install bower](http://bower.io/), a depedency package manager.
 
-###Grabbing the code
+### Grabbing the code
 
 Either clone this repository or fork it on GitHub
 
@@ -80,7 +80,7 @@ Since the client application is built using AngularJS and other 3rd party librar
 
 (This will install the dependencies declared in the /package.json file)
 
-##Running the server
+## Running the server
 
 * Once you've installed the dependencies, you can start the server by running the gulp default task: 
 
@@ -95,15 +95,15 @@ AngularJS and Bootstrap will work with the latest versions of Chrome, Firefox, S
 
 Swipe Box + Slick: Chrome, Safari, Firefox, Opera, IE9+, IOS4+, Android, windows phone.
 
-##Development
+## Development
 
-###Folders Structure
+### Folders Structure
 
 <img src="http://i84.photobucket.com/albums/k34/kdiggz415/seachSfFolderStructure.png" />
 
 So far, The folder structure for this application is sorted by features rather by type. But, this time. instead of placing all controllers/templates/ ect into the folder, I divided them by each type to make it more easier to navigate through. 
 
-###Features
+### Features
 
 Features include:
  
@@ -132,7 +132,7 @@ angular.module('myApp', [
 
 * <a href="https://github.com/brutaldesign/swipebox">Swipe box</a> (a jQuery "lightbox" plugin for desktop, mobile and tablet)
 
-##License 
+## License 
 
 MIT
 
